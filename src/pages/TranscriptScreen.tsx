@@ -6,9 +6,9 @@ interface TranscriptScreenProps {
   setShowDetailedWord: (show: boolean) => void
 }
 
-const TranscriptScreen = ({ 
-  setShowTranscriptTab, 
-  setShowDetailedWord 
+const TranscriptScreen = ({
+  setShowTranscriptTab,
+  setShowDetailedWord
 }: TranscriptScreenProps) => {
   const [displayedText, setDisplayedText] = useState<string[]>([])
   const [currentLineIndex, setCurrentLineIndex] = useState(0)
@@ -32,17 +32,17 @@ const TranscriptScreen = ({
     "Cancer occurs from uncontrolled division"
   ], []);
 
-  const keywords = ['cell', 'organisms', 'organelles', 'nucleus', 'mitochondria', 
-                   'ribosomes', 'endoplasmic reticulum', 'mitosis', 'meiosis',
-                   'chloroplasts', 'membrane', 'stem cells', 'cancer']
+  const keywords = ['cell', 'organisms', 'organelles', 'nucleus', 'mitochondria',
+    'ribosomes', 'endoplasmic reticulum', 'mitosis', 'meiosis',
+    'chloroplasts', 'membrane', 'stem cells', 'cancer']
 
   useEffect(() => {
     let interval: ReturnType<typeof setInterval>;
-    let timeout: ReturnType<typeof setTimeout>; 
+    let timeout: ReturnType<typeof setTimeout>;
 
     if (isPlaying && currentLineIndex < fullTranscript.length) {
       const currentLine = fullTranscript[currentLineIndex]
-      
+
       if (currentCharIndex < currentLine.length) {
         interval = setInterval(() => {
           setDisplayedText(prev => {
@@ -67,7 +67,7 @@ const TranscriptScreen = ({
       clearInterval(interval)
       clearTimeout(timeout)
     }
-    }, [currentLineIndex, currentCharIndex, isPlaying, fullTranscript]);
+  }, [currentLineIndex, currentCharIndex, isPlaying, fullTranscript]);
 
   useEffect(() => {
     if (transcriptRef.current) {
@@ -88,22 +88,21 @@ const TranscriptScreen = ({
   }
 
   const formatLine = (line: string, lineIndex: number) => {
-    if (lineIndex < currentLineIndex || 
-        (lineIndex === currentLineIndex && currentCharIndex === fullTranscript[lineIndex]?.length)) {
+    if (lineIndex < currentLineIndex ||
+      (lineIndex === currentLineIndex && currentCharIndex === fullTranscript[lineIndex]?.length)) {
       return line.split(' ').map((word, i) => {
         const cleanWord = word.toLowerCase().replace(/[.,]/g, '')
         const isKeyword = keywords.includes(cleanWord)
         const isSelected = selectedWord === cleanWord
-        
+
         if (isKeyword) {
           return (
-            <span 
-              key={i} 
-              className={`cursor-pointer font-bold ${
-                isSelected 
-                  ? 'text-blue-500 bg-primary-600 px-1 py-0.5 rounded' 
+            <span
+              key={i}
+              className={`cursor-pointer font-bold ${isSelected
+                  ? 'text-blue-500 bg-primary-600 px-1 py-0.5 rounded'
                   : 'text-primary-500 hover:text-primary-700'
-              }`}
+                }`}
               onClick={() => handleWordClick(word)}
             >
               {word}{' '}
@@ -120,7 +119,7 @@ const TranscriptScreen = ({
     <div className="pb-16 lg:pb-0">
       <header className="bg-gradient-to-r from-blue-700 to-blue-500 text-white p-4">
         <div className="flex items-center max-w-6xl mx-auto">
-          <button 
+          <button
             onClick={() => setShowTranscriptTab(false)}
             className="mr-3 hover:bg-white/10 p-1 rounded-full"
           >
@@ -132,11 +131,11 @@ const TranscriptScreen = ({
           </div>
         </div>
       </header>
-      
+
       <main className="max-w-6xl mx-auto">
         <div className="relative aspect-video bg-gray-900">
-          <img 
-            src="https://i.ytimg.com/vi/VHMFAi11EPw/maxresdefault.jpg" 
+          <img
+            src="https://i.ytimg.com/vi/VHMFAi11EPw/maxresdefault.jpg"
             alt="Biology lecture"
             className="w-full h-full object-cover opacity-80"
           />
@@ -145,7 +144,7 @@ const TranscriptScreen = ({
             <button className="bg-white/20 hover:bg-white/30 backdrop-blur-sm text-white rounded-full p-3 transition-all">
               <Camera size={20} />
             </button>
-            <button 
+            <button
               className={`rounded-full p-3 ${isPlaying ? 'bg-red-600' : 'bg-green-600'} text-white hover:scale-105 transition-transform`}
               onClick={togglePlayPause}
             >
@@ -153,28 +152,29 @@ const TranscriptScreen = ({
             </button>
           </div>
         </div>
-        
+
         <section className="px-4 py-6">
           <div className="flex justify-between items-center mb-6">
-          <h2 className="text-xl md:text-2xl font-bold text-gray-800">
-  Live Transcript<br />
-  <span className="text-base font-normal text-gray-500">(Realtime Speech to Text)</span>
-</h2>
+            <h2 className="text-xl md:text-2xl font-bold text-gray-800">
+              Live Transcript<br />
+              <span className="text-base font-normal text-gray-500">(Realtime Speech to Text)</span>
+              <span className="text-base font-normal text-gray-500">note: you can touch the word ex. cell</span>
+            </h2>
 
             <button className="bg-blue-100 hover:bg-blue-200 text-blue-600 px-4 py-2 rounded-full flex items-center space-x-2 transition-colors">
               <Bookmark size={18} />
               <span>Save</span>
             </button>
           </div>
-          
-          <div 
+
+          <div
             ref={transcriptRef}
             className="bg-gray-50 rounded-xl p-6 h-[400px] overflow-y-auto scroll-smooth"
           >
             <div className="space-y-8 text-center">
               {displayedText.map((line, index) => (
-                <div 
-                  key={index} 
+                <div
+                  key={index}
                   className="text-2xl md:text-3xl font-medium text-gray-800 leading-relaxed"
                 >
                   {formatLine(line, index)}
