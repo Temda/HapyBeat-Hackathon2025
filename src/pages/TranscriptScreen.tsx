@@ -157,7 +157,7 @@ const TranscriptScreen = ({
           <div className="flex justify-between items-center mb-6">
             <h2 className="text-xl md:text-2xl font-bold text-gray-800">
               Live Transcript<br />
-              <span className="text-base font-normal text-gray-500">(Realtime Speech to Text)</span>
+              <span className="text-base font-normal text-gray-500">(Realtime Speech to Text)</span><br />
               <span className="text-base font-normal text-gray-500">note: you can touch the word ex. cell</span>
             </h2>
 
