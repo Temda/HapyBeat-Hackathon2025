@@ -66,14 +66,16 @@ const HomeScreen = ({ setActiveTab, setShowTranscriptTab }: HomeScreenProps) => 
 
                     <div className="grid gap-3 md:grid-cols-2 lg:grid-cols-3">
                         <SavedLessonCard
-                            title="Mathematics: Algebra Basics"
+                            title="Mathematics:"
+                            sec="Algebra Basics"
                             teacher="Ajarn Preecha"
                             date="Yesterday"
                             duration="45 min"
                             // setShowTranscriptTab={setShowTranscriptTab}
                         />
                         <SavedLessonCard
-                            title="Thai Literature: Classic Poems"
+                            title="Thai Literature:"
+                            sec="Classic Poems"
                             teacher="Ajarn Malee"
                             date="2 days ago"
                             duration="50 min"

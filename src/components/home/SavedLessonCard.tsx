@@ -3,6 +3,7 @@ import { useState } from 'react'
 
 interface SavedLessonCardProps {
   title: string
+  sec: string
   teacher: string
   date: string
   duration: string
@@ -14,6 +15,7 @@ interface SavedLessonCardProps {
 
 const SavedLessonCard = ({
   title,
+  sec,
   teacher,
   date,
   duration,
@@ -61,6 +63,7 @@ const SavedLessonCard = ({
           <h3 className="font-semibold text-gray-800 text-lg mb-1 truncate">
             {title}
           </h3>
+          <p>{sec}</p>
           <p className="text-gray-600 text-sm mb-2 truncate">
             {teacher}
           </p>
