@@ -36,7 +36,7 @@ const SavedLessonCard = ({
   }
 
   return (
-    <div 
+    <div
       className="bg-white rounded-xl shadow-sm p-4 hover:shadow-md transition-shadow cursor-pointer"
       onClick={onClick}
     >
@@ -60,10 +60,12 @@ const SavedLessonCard = ({
 
         {/* Content */}
         <div className="flex-1 min-w-0">
-          <h3 className="font-semibold text-gray-800 text-lg mb-1 truncate">
-            {title}
-          </h3>
-          <p>{sec}</p>
+          <div className="space-y-0.5">
+            <h3 className="font-semibold text-gray-900 text-base md:text-lg leading-snug line-clamp-2">
+              {title} <span className="text-sm font-medium">{sec}</span>
+            </h3>
+          </div>
+
           <p className="text-gray-600 text-sm mb-2 truncate">
             {teacher}
           </p>
@@ -76,17 +78,17 @@ const SavedLessonCard = ({
 
           {/* Actions */}
           <div className="flex justify-between items-center">
-            <button 
+            <button
               onClick={handleBookmarkClick}
               className="text-gray-400 hover:text-yellow-500 transition-colors"
               aria-label={bookmarked ? "Remove bookmark" : "Add bookmark"}
             >
-              <Bookmark 
-                className={`w-5 h-5 ${bookmarked ? 'fill-yellow-400 text-yellow-400' : ''}`} 
+              <Bookmark
+                className={`w-5 h-5 ${bookmarked ? 'fill-yellow-400 text-yellow-400' : ''}`}
               />
             </button>
-            <button 
-              className="bg-gray-200 hover:bg-gray-200 text-black text-xs py-1 px-3 rounded-full transition-colors"
+            <button
+              className="bg-gray-200 hover:bg-gray-300 text-black text-xs py-1 px-3 rounded-full transition-colors"
               onClick={(e) => {
                 e.stopPropagation()
                 if (onClick) onClick()
@@ -96,6 +98,8 @@ const SavedLessonCard = ({
             </button>
           </div>
         </div>
+
+
       </div>
     </div>
   )
